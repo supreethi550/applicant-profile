@@ -1,0 +1,35 @@
+.card {
+  width: 300px;
+  height: 450px;
+  max-height: 450px;
+  margin: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: 0.3s;
+  background-color: #f1f1f1;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  width: 80%;
+  height: auto;
+  border-radius: 50%;
+  border: #ffffff 8px solid;
+  margin: 1rem auto;
+}
+
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+}

@@ -1,0 +1,15 @@
+<div class="card">
+  <img [src]="avatar.avatar" alt="Avatar" />
+  <div class="container">
+    <h4>
+      <b>{{ avatar.name }}</b>
+    </h4>
+    <button class="btn btn-outline-secondary" (click)="openEditModal()">Edit Profile</button>
+    <div *ngIf="avatar.skills">
+      <h5>Skills</h5>
+        <span *ngFor="let skill of avatar.skills; let i = index">{{ skill.name }}
+          <span *ngIf="avatar.skills?.length > 1 && (avatar.skills?.length - i !== 1)">, </span>
+        </span>
+    </div>
+  </div>
+</div>

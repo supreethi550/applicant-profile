@@ -1,0 +1,23 @@
+<div class="popover bs-popover-right show">
+  <div class="popover-body">
+    <button class="btn btn-link"
+            *ngIf="currentAction === 'apply'"
+            (click)="onAction('apply')">
+      Apply
+    </button>
+    <button class="btn btn-link"
+            *ngIf="currentAction === 'edit'"
+            (click)="onAction('edit')">
+      Edit
+    </button>
+    <button class="btn btn-link"
+            *ngIf="currentAction === 'update'"
+            (click)="onAction('update')">
+      Update
+    </button>
+    <button class="btn btn-link"
+            (click)="onAction('remove')">
+      Remove
+    </button>
+  </div>
+</div>

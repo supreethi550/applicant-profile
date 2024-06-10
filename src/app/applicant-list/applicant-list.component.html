@@ -1,0 +1,9 @@
+<div class="applicant-list">
+  <app-applicant-card
+    *ngFor="let avatar of avatars; let i = index"
+    [avatar]="avatar"
+    (skillsUpdated)="updateSkills(i, $event)"
+  ></app-applicant-card>
+</div>
+
+<app-applicant-profile-edit-modal></app-applicant-profile-edit-modal>
