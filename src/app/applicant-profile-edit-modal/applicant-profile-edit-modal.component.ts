@@ -180,6 +180,13 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  onKeyUp($event:KeyboardEvent, skill: FormGroup, index: number) : void {
+    // console.log(skill.con)
+    if($event?.key === 'Enter'  && $event?.charCode === 13){
+      this.onPopoverAction(skill.value.action, index);
+    }
+  }
+
   getSkillErrorMessages(index: number, field: string): string {
     const skill: FormGroup = this.skills.at(index) as FormGroup;
 

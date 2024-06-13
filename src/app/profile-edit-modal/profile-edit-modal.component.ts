@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ProfileEditModalService } from './applicant-profile-edit-modal.service';
+import { ProfileEditModalService } from '../applicant-profile-edit-modal/applicant-profile-edit-modal.service';
 
 interface Skill {
   name: string;

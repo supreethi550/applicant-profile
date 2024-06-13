@@ -1,46 +1,47 @@
-<div id="profileEditModal"
-     class="modal">
+<div id="profileEditModal" class="modal">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit Profile</h5>
-        <button type="button"
-                class="close"
-                (click)="onCancel()">
+        <button type="button" class="close" (click)="onCancel()">
           &times;
         </button>
       </div>
       <div class="modal-body">
         <div class="d-flex">
           <!-- <div class="profile-image-container"> -->
-          <img [src]="avatar?.avatar"
-               alt="Avatar"
-               class="profile-image me-3" />
+          <img [src]="avatar?.avatar" alt="Avatar" class="profile-image me-3" />
 
           <!-- </div> -->
           <div class="flex-fill">
             <div class="flex-row">
               <div class="mb-3 width-30 mr-2">
-                <label for="searchTypeSelect"
-                       class="form-label">Search Type</label>
-                <select id="searchTypeSelect"
-                        class="form-control"
-                        [(ngModel)]="searchType">
+                <label for="searchTypeSelect" class="form-label"
+                  >Search Type</label
+                >
+                <select
+                  id="searchTypeSelect"
+                  class="form-control"
+                  [(ngModel)]="searchType"
+                >
                   <option value="skill">Skill</option>
                   <option value="rating">Rating</option>
                 </select>
               </div>
               <div class="mb-3 mr-2">
-                <label for="searchInput"
-                       class="form-label">Search</label>
-                <input id="searchInput"
-                       type="text"
-                       class="form-control"
-                       [(ngModel)]="searchText" />
+                <label for="searchInput" class="form-label">Search</label>
+                <input
+                  id="searchInput"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="searchText"
+                />
               </div>
               <div class="mt-1.7">
-                <button class="btn btn-outline-secondary mb-3"
-                        (click)="getFilteredSkills()">
+                <button
+                  class="btn btn-outline-secondary mb-3"
+                  (click)="getFilteredSkills()"
+                >
                   Search
                 </button>
               </div>
@@ -57,52 +58,69 @@
                   </thead>
 
                   <tbody formArrayName="skills">
-                    <tr *ngFor="let skill of skills.controls; let i = index"
-                        [formGroupName]="i">
+                    <tr
+                      *ngFor="let skill of skills.controls; let i = index"
+                      [formGroupName]="i"
+                    >
                       <td>
-                        <input type="text"
-                               class="form-control"
-                               formControlName="name"
-                               pattern="[a-zA-Z0-9\s ]{2,}"
-                               minlength="2"
-                               maxlength="50"
-                               [readonly]="skill.get('action')?.value === 'edit'" />
-                        <div *ngIf="formSubmitted && skill.get('name')?.invalid"
-                             class="text-danger">
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="name"
+                          pattern="[a-zA-Z0-9\s ]{2,}"
+                          minlength="2"
+                          maxlength="50"
+                          (keypress)="onKeyUp($event, skill, i)"
+                          [readonly]="skill.get('action')?.value === 'edit'"
+                        />
+                        <div
+                          *ngIf="formSubmitted && skill.get('name')?.invalid"
+                          class="text-danger"
+                        >
                           {{ getSkillErrorMessages(i, "name") }}
                         </div>
                       </td>
                       <td>
-                        <input type="number"
-                               class="form-control"
-                               formControlName="rating"
-                               [readonly]="skill.get('action')?.value === 'edit'"
-                               min="1"
-                               max="5" />
-                        <div *ngIf="formSubmitted && skill.get('rating')?.invalid"
-                             class="text-danger">
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="rating"
+                          (keypress)="onKeyUp($event, skill, i)"
+                          [readonly]="skill.get('action')?.value === 'edit'"
+                          min="1"
+                          max="5"
+                        />
+                        <div
+                          *ngIf="formSubmitted && skill.get('rating')?.invalid"
+                          class="text-danger"
+                        >
                           {{ getSkillErrorMessages(i, "rating") }}
                         </div>
                       </td>
                       <td>
-                        <button type="button"
-                                class="btn btn-secondary"
-                                (click)="popoverIndex = i">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          (click)="popoverIndex = i"
+                        >
                           ...
                         </button>
-                        <div *ngIf="popoverIndex === i"
-                             class="popover">
-                          <app-pop-over [skill]="skill"
-                                        (action)="onPopoverAction($event, i)"
-                                        (closePopover)="popoverIndex = null"></app-pop-over>
+                        <div *ngIf="popoverIndex === i" class="popover">
+                          <app-pop-over
+                            [skill]="skill"
+                            (action)="onPopoverAction($event, i)"
+                            (closePopover)="popoverIndex = null"
+                          ></app-pop-over>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="mt-1.5">
-                  <button class="btn btn-secondary mb-3 add-skill-btn"
-                          (click)="addSkill()">
+                  <button
+                    class="btn btn-secondary mb-3 add-skill-btn"
+                    (click)="addSkill()"
+                  >
                     Add Skill
                   </button>
                 </div>
@@ -112,10 +130,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary"
-                (click)="onCancel()">Cancel</button>
-        <button class="btn btn-primary"
-                (click)="onApply()">Apply</button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+        <button class="btn btn-primary" (click)="onApply()">Apply</button>
       </div>
     </div>
   </div>
