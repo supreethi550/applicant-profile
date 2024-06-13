@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProfileEditModalService } from './applicant-profile-edit-modal.service';
 
@@ -16,7 +16,7 @@ interface Skill {
 })
 export class ProfileEditModalComponent implements OnInit, OnDestroy {
   avatar: any;
-  skillsForm: FormGroup;
+  skillsForm: UntypedFormGroup;
   subscription: Subscription;
   searchType: string = 'skill';
   searchText: string = '';
@@ -26,7 +26,7 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
   nonFilteredSkills: Skill[];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private profileEditModalService: ProfileEditModalService
   ) {
     this.skillsForm = this.fb.group({
@@ -45,8 +45,8 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  get skills(): FormArray {
-    return this.skillsForm.get('skills') as FormArray;
+  get skills(): UntypedFormArray {
+    return this.skillsForm.get('skills') as UntypedFormArray;
   }
 
   ngOnDestroy(): void {
@@ -55,7 +55,7 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
 
   addSkill(): void {
     this.formSubmitted = true;
-    const newSkill = this.skillsForm.get('skills') as FormArray;
+    const newSkill = this.skillsForm.get('skills') as UntypedFormArray;
     if (newSkill.valid) {
       this.addSkillToForm(newSkill);
       this.formSubmitted = false;
@@ -75,7 +75,7 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
   }
 
   updateSkill(index: number): void {
-    const skill = this.skills.at(index) as FormGroup;
+    const skill = this.skills.at(index) as UntypedFormGroup;
     if (skill.valid) {
       if (skill.value.action === 'apply') {
         skill.patchValue({ action: 'edit' });
@@ -128,7 +128,7 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
   }
 
   setSkills(skills: Skill[]): void {
-    const skillsArray: FormArray = this.skillsForm.get('skills') as FormArray;
+    const skillsArray: UntypedFormArray = this.skillsForm.get('skills') as UntypedFormArray;
     skillsArray.clear();
     skills.forEach((skill) => {
       skillsArray.push(
@@ -168,19 +168,19 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
         this.skills.controls = this.skills.controls.filter((control) => {
           const name: string = control.value.name || '';
           return name.includes(this.searchText);
-        }) as FormGroup[];
+        }) as UntypedFormGroup[];
       } else {
         const rating: number = parseInt(this.searchText, 10);
         this.skills.controls = this.skills.controls.filter((control) => {
           return control.value.rating === rating;
-        }) as FormGroup[];
+        }) as UntypedFormGroup[];
       }
     } else {
       this.setSkills(this.nonFilteredSkills || []);
     }
   }
 
-  onKeyUp($event:KeyboardEvent, skill: FormGroup, index: number) : void {
+  onKeyUp($event:KeyboardEvent, skill: UntypedFormGroup, index: number) : void {
     // console.log(skill.con)
     if($event?.key === 'Enter'  && $event?.charCode === 13){
       this.onPopoverAction(skill.value.action, index);
@@ -188,7 +188,7 @@ export class ProfileEditModalComponent implements OnInit, OnDestroy {
   }
 
   getSkillErrorMessages(index: number, field: string): string {
-    const skill: FormGroup = this.skills.at(index) as FormGroup;
+    const skill: UntypedFormGroup = this.skills.at(index) as UntypedFormGroup;
 
     if (skill.get(field)?.hasError('required')) {
       return 'This field is required';

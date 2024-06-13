@@ -10,6 +10,7 @@ import { AvatarListComponent } from './applicant-list/applicant-list.component';
 import { ProfileEditModalComponent } from './applicant-profile-edit-modal/applicant-profile-edit-modal.component';
 import { AvatarCardComponent } from './applicant-card/applicant-card.component';
 import { PopOverComponent } from './pop-over/pop-over.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PopOverComponent } from './pop-over/pop-over.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgbModule,
   ],
   providers: [
  ],

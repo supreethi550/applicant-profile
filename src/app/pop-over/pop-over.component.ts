@@ -5,7 +5,7 @@ import {
    Output,
    OnInit
   } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pop-over',
@@ -13,7 +13,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./pop-over.component.css']
 })
 export class PopOverComponent  implements OnInit {
-  @Input() skill: FormGroup;
+  @Input() skill: UntypedFormGroup;
   // @Input() skillIndex: number;
   @Output() action = new EventEmitter<string>();
   @Output() closePopover = new EventEmitter<void>();
